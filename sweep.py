@@ -158,6 +158,31 @@ def download(cv, files):
     return saved, skipped
 
 
+def fetch_syllabi(cv, courses):
+    """강의계획서 탭(syllabus_body)의 iframe(수강신청 사이트)을 받아 <과목>/syllabus/ 에 저장."""
+    import html as _html
+    saved = 0
+    for c in courses:
+        try:
+            cid = c["id"]
+            body = cv.get(f"/courses/{cid}", **{"include[]": "syllabus_body"})[0].get("syllabus_body") or ""
+            m = re.search(r'<iframe[^>]+src="([^"]+)"', body)
+            if not m:
+                log(f"FAIL syllabus course {cid}: iframe 없음")
+                continue
+            dest = ROOT / safe(c["name"]) / "syllabus" / "학사계획서.html"
+            if dest.exists():
+                continue
+            r = requests.get(_html.unescape(m.group(1)), timeout=60)
+            r.raise_for_status()
+            dest.parent.mkdir(parents=True, exist_ok=True)
+            dest.write_text(r.text, encoding=r.encoding or "utf-8")
+            saved += 1
+        except Exception as e:
+            log(f"FAIL syllabus course {c.get('id')}: {brief(e)}")
+    return saved
+
+
 def diff_against_state(events):
     """calendar_state.json 과 비교해 new/changed/unchanged 로 분류(중복 방지)."""
     state = json.loads(STATE.read_text()) if STATE.exists() else {}
@@ -182,6 +207,7 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--term", default="2026-2", help="과목명에 포함된 학기 문자열")
     ap.add_argument("--download", action="store_true")
+    ap.add_argument("--syllabus", action="store_true", help="학사계획서 저장")
     ap.add_argument("--skip-events", action="store_true")
     args = ap.parse_args()
     ROOT.mkdir(parents=True, exist_ok=True)
@@ -195,6 +221,8 @@ def main():
     if args.download:
         saved, skipped = download(cv, files)
         print(f"\n다운로드 {saved}개, 기존 파일 건너뜀 {skipped}개")
+    if args.syllabus:
+        print(f"\n학사계획서 {fetch_syllabi(cv, courses)}개 저장")
     if LOG.exists():
         print(f"\n실패 항목은 {LOG} 참고")
 
