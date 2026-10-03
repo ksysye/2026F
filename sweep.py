@@ -61,7 +61,7 @@ class Canvas:
         try:
             return self.get(path, **params)
         except Exception as e:  # 실패해도 계속 진행
-            log(f"FAIL {what} {path}: {e}")
+            log(f"FAIL {what} {path}: {brief(e)}")
             return []
 
 
@@ -75,9 +75,9 @@ def safe(name):
     return re.sub(r'[\\/:*?"<>|]+', "_", name).strip() or "unnamed"
 
 
-def collect(cv):
+def collect(cv, term):
     courses = [c for c in cv.try_get("courses", "/courses", enrollment_state="active", include=["term"])
-               if c.get("name") and not c.get("access_restricted_by_date")]
+               if c.get("name") and term in c["name"]]
     events, files = [], []
     for c in courses:
         cid, cname = c["id"], safe(c["name"])
@@ -106,7 +106,10 @@ def collect(cv):
         for a in cv.try_get("assignment-files", f"/courses/{cid}/assignments"):
             for fid in re.findall(r"/files/(\d+)", a.get("description") or ""):
                 files.append((cid, cname, int(fid), "assignment"))
-    return courses, events, files
+    uniq = {}
+    for e in events:  # 퀴즈가 과제로도 잡히는 중복 제거
+        uniq.setdefault((e["course_id"], e["title"], e["due"]), e)
+    return courses, list(uniq.values()), files
 
 
 def classify(fobj, origin):
@@ -118,6 +121,16 @@ def classify(fobj, origin):
     if any(k in n for k in ("reading", "paper", "article", "읽기")):
         return "readings"
     return "etc"
+
+
+def meta_name(loc):
+    return (loc.get("meta") or {}).get("display_name", "?")
+
+
+def brief(e):
+    """서명된 URL이 로그에 남지 않도록 호스트/오류 종류만 기록."""
+    m = re.search(r"host='([^']+)'", str(e))
+    return f"{type(e).__name__} host={m.group(1)}" if m else str(e).split(" for url:")[0][:200]
 
 
 def download(cv, files):
@@ -133,15 +146,15 @@ def download(cv, files):
             if dest.exists():  # 덮어쓰지 않고 건너뜀
                 skipped += 1
                 continue
-            dest.parent.mkdir(parents=True, exist_ok=True)
             with cv.s.get(meta["url"], stream=True, timeout=120) as r:
                 r.raise_for_status()
+                dest.parent.mkdir(parents=True, exist_ok=True)
                 with dest.open("wb") as f:
                     for chunk in r.iter_content(1 << 16):
                         f.write(chunk)
             saved += 1
         except Exception as e:
-            log(f"FAIL download file {fid} (course {cid}): {e}")
+            log(f"FAIL download file {fid} ({meta_name(locals())}, course {cid}): {brief(e)}")
     return saved, skipped
 
 
@@ -167,12 +180,13 @@ def print_table(events):
 
 def main():
     ap = argparse.ArgumentParser()
+    ap.add_argument("--term", default="2026-2", help="과목명에 포함된 학기 문자열")
     ap.add_argument("--download", action="store_true")
     ap.add_argument("--skip-events", action="store_true")
     args = ap.parse_args()
     ROOT.mkdir(parents=True, exist_ok=True)
     cv = Canvas()
-    courses, events, files = collect(cv)
+    courses, events, files = collect(cv, args.term)
     print(f"과목 {len(courses)}개, 일정 {len(events)}건, 파일 후보 {len(files)}개")
     if not args.skip_events:
         events = diff_against_state(events)
