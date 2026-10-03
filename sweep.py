@@ -22,8 +22,9 @@ import requests
 KST = ZoneInfo("Asia/Seoul")
 ROOT = Path(os.environ.get("SWEEP_ROOT", Path.home() / "2026F")).expanduser()
 LOG = ROOT / "log.txt"
-EVENTS = ROOT / "events.json"
-STATE = ROOT / "calendar_state.json"  # 캘린더 등록 후 {key: {hash, calendar_id}} 저장용
+HERE = Path(__file__).resolve().parent  # 저장소에 커밋해서 세션이 바뀌어도 유지
+EVENTS = HERE / "events.json"
+STATE = HERE / "calendar_state.json"  # {key: {hash, event_id}} 캘린더 등록 이력
 
 
 def log(msg):
@@ -183,19 +184,32 @@ def fetch_syllabi(cv, courses):
     return saved
 
 
+def keep_announcements(events):
+    """공지에서 읽어 수동 추가한 일정(source=announcement)은 재수집 때 지우지 않는다."""
+    if EVENTS.exists():
+        old = json.loads(EVENTS.read_text(encoding="utf-8"))
+        have = {e["key"] for e in events}
+        events += [e for e in old if e.get("source") == "announcement" and e["key"] not in have]
+    return events
+
+
 def diff_against_state(events):
     """calendar_state.json 과 비교해 new/changed/unchanged 로 분류(중복 방지)."""
     state = json.loads(STATE.read_text()) if STATE.exists() else {}
     for e in events:
         h = json.dumps({k: e[k] for k in ("title", "due", "end") if k in e}, sort_keys=True)
         old = state.get(e["key"])
+        if e["due"] and e["due"] < datetime.now(KST).isoformat():
+            e["status"] = "past"
+            e["hash"] = h
+            continue
         e["status"] = "new" if not old else ("changed" if old.get("hash") != h else "unchanged")
         e["hash"] = h
     return events
 
 
 def print_table(events):
-    rows = sorted((e for e in events if e["due"]), key=lambda e: e["due"])
+    rows = sorted((e for e in events if e["due"] and e["status"] != "past"), key=lambda e: e["due"])
     print(f"\n{'마감/시작(KST)':<17} {'상태':<9} 제목")
     for e in rows:
         print(f"{e['due'][:16].replace('T', ' '):<17} {e['status']:<9} [{e['course']}] {e['title']}")
@@ -215,7 +229,7 @@ def main():
     courses, events, files = collect(cv, args.term)
     print(f"과목 {len(courses)}개, 일정 {len(events)}건, 파일 후보 {len(files)}개")
     if not args.skip_events:
-        events = diff_against_state(events)
+        events = diff_against_state(keep_announcements(events))
         EVENTS.write_text(json.dumps(events, ensure_ascii=False, indent=2), encoding="utf-8")
         print_table(events)
     if args.download:
