@@ -9,15 +9,16 @@ import { Stage } from './components/Stage';
 import { EndingScreen } from './components/ending/EndingScreen';
 import { LetterScreen } from './components/ending/LetterScreen';
 import { MessageArrivalPopup } from './components/ending/MessageArrivalPopup';
+import { ENDING_CONFIG } from './config/endingConfig';
 import { GameProvider, useGame } from './game/store';
 
 function Game() {
   const { state, dispatch } = useGame();
   const p = state.phase;
   const showIntro = p === 'INTRO' || p === 'UNLOCKING';
-  const showMachine = p !== 'INTRO' && p !== 'GAME_OVER';
+  const showMachine = p !== 'INTRO' && !(p === 'GAME_OVER' && ENDING_CONFIG.showEndingScreen);
   return (
-    <Stage backdropImage={p === 'GAME_OVER' || showIntro ? null : ASSETS.machine.background}>
+    <Stage backdropImage={(p === 'GAME_OVER' && ENDING_CONFIG.showEndingScreen) || showIntro ? null : ASSETS.machine.background}>
       <div className="game-root" data-phase={p}>
         {showMachine && <ClawMachineScreen />}
         {showIntro && <IntroScreen />}
@@ -26,7 +27,8 @@ function Game() {
         {p === 'COLLECTION' && <CollectionScreen />}
         {p === 'MESSAGE_ARRIVAL' && <MessageArrivalPopup onOpen={() => dispatch({ type: 'ENDING_OPEN' })} />}
         {p === 'MESSAGE_OPEN' && <LetterScreen onFinish={() => dispatch({ type: 'ENDING_FINISH' })} />}
-        {p === 'GAME_OVER' && <EndingScreen />}
+        {p === 'GAME_OVER' && ENDING_CONFIG.showEndingScreen && <EndingScreen />}
+        {p === 'GAME_OVER' && !ENDING_CONFIG.showEndingScreen && <div className="from-black" />}
       </div>
     </Stage>
   );

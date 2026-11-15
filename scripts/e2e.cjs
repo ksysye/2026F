@@ -131,10 +131,14 @@ async function moveTo(p, x) {
     await p.click('[data-testid=finish]');
     await p.waitForTimeout(900); await p.screenshot({ path: '/tmp/shots-fade.png' });
     await waitPhase(p, 'GAME_OVER', 8000);
-    ok(await p.locator('[data-testid=ending]').count() === 1 && await p.locator('button').count() === 0, '최종 엔딩 화면 (버튼 없음)');
+    await p.waitForTimeout(2300);
+    ok(await p.locator('.mbtn:not([disabled])').count() === 0 && await p.locator('.collection-btn:not([disabled])').count() === 1, '엔딩 후: 뽑기 불가 + 보관함 열람 가능, 재시작 UI 없음');
     await p.screenshot({ path: '/tmp/shots-ending.png' });
-    await p.reload(); await p.waitForTimeout(800);
-    ok(await phase(p) === 'GAME_OVER', '새로고침해도 종료 상태 유지');
+    await p.click('.collection-btn'); await waitPhase(p, 'COLLECTION');
+    await p.waitForTimeout(700); await p.click('[data-testid=col-close]'); await waitPhase(p, 'GAME_OVER');
+    ok(true, '엔딩 후 보관함 열람 → 닫기 → 둘러보기 상태 복귀');
+    await p.reload(); await p.waitForTimeout(1500);
+    ok(await phase(p) === 'GAME_OVER', '새로고침해도 종료 상태 유지(자동 재시작 안 됨)');
     ok(errors.length === 0, `콘솔 에러 없음 ${errors.join('|')}`);
   }
 

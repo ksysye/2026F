@@ -116,9 +116,10 @@ function reducer(s: GameState, a: Action): GameState {
         ...s, returnedCapsuleId: s.activeCapsuleId, activeCapsuleId: null, activeRewardId: null, phase: 'MACHINE_IDLE',
       };
     case 'OPEN_COLLECTION':
-      return s.phase === 'MACHINE_IDLE' ? { ...s, phase: 'COLLECTION' } : s;
+      return s.phase === 'MACHINE_IDLE' || (s.phase === 'GAME_OVER' && !ENDING_CONFIG.showEndingScreen) ? { ...s, phase: 'COLLECTION' } : s;
     case 'CLOSE_COLLECTION':
-      return s.phase === 'COLLECTION' ? { ...s, phase: 'MACHINE_IDLE' } : s;
+      // 엔딩 이후에는 둘러보기(GAME_OVER) 상태로 복귀
+      return s.phase === 'COLLECTION' ? { ...s, phase: s.endingFinished ? 'GAME_OVER' : 'MACHINE_IDLE' } : s;
     case 'ENDING_ARRIVE':
       return s.endingFinished ? s : { ...s, phase: 'MESSAGE_ARRIVAL' };
     case 'ENDING_OPEN':

@@ -16,7 +16,13 @@ export const ENDING_CONFIG = {
   messageButtonText: '메시지 확인하기',
   finishButtonText: '마침',
 
-  /** 최종 엔딩 화면 문구 (빈 문자열이면 표시 안 함) */
+  /**
+   * false(기본): '마침' 후 별도 종료 화면 없이 앱으로 돌아와 보관함 등을 구경할 수 있음(뽑기는 불가, 재시작/충전 없음).
+   * true: 버튼 없는 최종 엔딩 화면에서 종료.
+   */
+  showEndingScreen: false,
+
+  /** 최종 엔딩 화면 문구 (showEndingScreen=true 일 때) */
   endingText: '끝',
 
   allowUserRestart: false,

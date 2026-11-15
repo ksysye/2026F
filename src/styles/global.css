@@ -235,3 +235,7 @@ hr.dots { border: 0; border-top: 2px dotted #111; margin: 0; }
 .devpanel label { display: flex; justify-content: space-between; gap: 6px; align-items: center; }
 .devpanel input { width: 60px; }
 .devpanel button { padding: 4px 6px; border-radius: 6px; font-size: 12px; }
+
+/* 엔딩 후 앱 둘러보기: 검정에서 서서히 밝아지며 복귀 */
+.from-black { position: absolute; inset: 0; z-index: 20; background: #07060c; pointer-events: none; animation: from-black 2s ease forwards; }
+@keyframes from-black { 0% { opacity: 1; } 100% { opacity: 0; } }

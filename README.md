@@ -57,3 +57,7 @@ src/styles/global.css   맨 위 THEME 변수 = 색상
 ## 보안 참고
 
 현재 상태는 localStorage라 브라우저 개발자 도구로 값을 직접 수정할 수 있습니다. 실제 서비스에서 하트·보상을 조작 불가하게 하려면 `src/game/storage.ts`의 `StorageAdapter`를 서버 API로 교체하고 뽑기 판정/하트 차감/설정 변경을 서버에서 권한 검증하세요.
+
+## 엔딩 이후
+
+'마침' 후에는 종료 화면으로 끝나지 않고 앱으로 돌아와 보관함(편지 상세 포함)을 자유롭게 구경할 수 있습니다. 뽑기 조작은 비활성화되고 재시작/하트 충전 UI는 없습니다. 버튼 없는 최종 엔딩 화면을 쓰려면 `ENDING_CONFIG.showEndingScreen = true`.

@@ -211,7 +211,7 @@ export function ClawMachineScreen() {
           type="button"
           className={`collection-btn ${collectedCount === totalCount ? 'complete' : ''}`}
           aria-label="보관함"
-          disabled={state.phase !== 'MACHINE_IDLE'}
+          disabled={state.phase !== 'MACHINE_IDLE' && state.phase !== 'GAME_OVER'}
           onClick={() => dispatch({ type: 'OPEN_COLLECTION' })}
         >
           <AssetImage src={ASSETS.ui.collection} fallback={<PlaceholderCollectionIcon />} />
