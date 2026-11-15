@@ -32,7 +32,7 @@ export function IntroScreen() {
 
   return (
     <div className={`intro ${leaving ? 'leaving' : ''}`} style={{ ['--bg-ms' as string]: `${T.bgTransition}ms` }}>
-      <AssetImage src={ASSETS.intro.background} fallback={<div className="intro-bg-placeholder" />} className="fill" />
+      <AssetImage src={ASSETS.intro.background} fallback={<div className="intro-bg-placeholder" />} className="fill" fit="cover" />
       <LockAnimation shaking={shake} open={open} />
       <KeyAnimation stage={key} />
       {flash && <div className="flash" style={{ left: L.lock.x + L.lock.w / 2, top: L.lock.y + L.lock.h / 2 }} />}

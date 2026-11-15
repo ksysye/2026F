@@ -7,11 +7,12 @@ export interface Rect { x: number; y: number; w: number; h: number }
 export const STAGE = { width: 360, height: 640 };
 
 export const INTRO_LAYOUT = {
-  lock: { x: 120, y: 250, w: 120, h: 140 } as Rect,
+  // 제공된 배경(924x2000, 세로 중앙 기준 cover)에서 자물쇠를 잘라낸 lock.png 의 위치
+  lock: { x: 138.7, y: 336.4, w: 81.4, h: 107.1 } as Rect,
   /** 열쇠 구멍 위치 (자물쇠 영역 안의 비율) */
-  keyhole: { fx: 0.5, fy: 0.62 },
-  /** 열쇠 크기, tip = 열쇠 끝(구멍에 들어가는 부분)의 비율 위치 */
-  key: { w: 60, h: 120, tip: { fx: 0.5, fy: 0.03 } },
+  keyhole: { fx: 0.507, fy: 0.72 },
+  /** 열쇠 크기(key.png 는 끝이 위를 향한 세로 이미지), tip = 열쇠 끝의 비율 위치 */
+  key: { w: 44, h: 110, tip: { fx: 0.5, fy: 0.01 } },
   /** 열쇠가 처음 숨어 있는 아래 오프셋(px) / 접근 중 멈춤 거리(px) */
   keyStartOffset: 380,
   keyApproachOffset: 46,

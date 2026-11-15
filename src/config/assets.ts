@@ -5,7 +5,9 @@
  * 확장자/이름을 바꾸고 싶으면 이 파일의 경로만 수정하세요.
  */
 const base = `${import.meta.env.BASE_URL}assets/`;
-const p = (path: string) => `${base}${path}`;
+// 단일 HTML로 배포할 때 이미지를 data URI로 주입하기 위한 선택적 후크 (일반 실행에는 영향 없음)
+const overrides = (globalThis as { __ASSET_OVERRIDES?: Record<string, string> }).__ASSET_OVERRIDES;
+const p = (path: string) => overrides?.[path] ?? `${base}${path}`;
 
 export const ASSETS = {
   intro: {

@@ -17,7 +17,7 @@ function Game() {
   const showIntro = p === 'INTRO' || p === 'UNLOCKING';
   const showMachine = p !== 'INTRO' && p !== 'GAME_OVER';
   return (
-    <Stage backdropImage={p === 'GAME_OVER' ? null : showIntro ? ASSETS.intro.background : ASSETS.machine.background}>
+    <Stage backdropImage={p === 'GAME_OVER' || showIntro ? null : ASSETS.machine.background}>
       <div className="game-root" data-phase={p}>
         {showMachine && <ClawMachineScreen />}
         {showIntro && <IntroScreen />}
