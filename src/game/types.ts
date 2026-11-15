@@ -25,6 +25,8 @@ export interface RewardDef {
   message: string;
   /** 보내는 사람 */
   sender: string;
+  /** 첨부 사진 경로 목록 (public/assets/photos/ 아래 파일). 비어 있으면 표시 안 함 */
+  photos: string[];
 }
 
 /** 저장되는 "확정" 상태. 진행 중(IN_PROGRESS) 같은 일시 상태는 저장하지 않음. */

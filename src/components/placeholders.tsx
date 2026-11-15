@@ -144,7 +144,7 @@ export function PlaceholderClaw({ grip }: { grip: number }) {
 export function EnvelopeIcon({ size = 64 }: { size?: number }) {
   return (
     <div style={{ width: size, height: size * 0.75, position: 'relative' }}>
-      <PlaceholderReward reward={{ id: 'x', name: '', description: '', color: INK, shape: 'letter', message: '', sender: '' }} />
+      <PlaceholderReward reward={{ id: 'x', name: '', description: '', color: INK, shape: 'letter', message: '', sender: '', photos: [] }} />
     </div>
   );
 }

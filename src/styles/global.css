@@ -8,7 +8,7 @@
   --c-ink: #111111;
   --c-primary: #111111;
   --c-sub: #ffffff;
-  --c-frame: #fbcbdd;
+  --c-frame: #ffe1e6; /* 인형뽑기 본체 색 (제공된 색상 이미지 기준) */
   --c-line: 1.5px solid #111;
   --font: 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', system-ui, sans-serif;
   --font-dot: 'DotGothic16', 'Courier New', monospace;
@@ -173,6 +173,12 @@ hr.dots { border: 0; border-top: 2px dotted #111; margin: 0; }
 
 .detail-page .letter-card { position: absolute; left: 16px; right: 15px; top: 79px; bottom: 16px; border-radius: 26px; background: #fff; border: var(--c-line); padding: 26px 22px; animation: card-in .9s cubic-bezier(.3,1.2,.5,1); }
 .letter-to { font-family: var(--font-dot); font-size: 40px; line-height: 1.05; letter-spacing: 3px; margin-bottom: 18px; }
+.letter-scroll { position: absolute; left: 22px; right: 22px; top: 26px; bottom: 80px; overflow-y: auto; touch-action: pan-y; padding-right: 2px; }
+.photos { display: flex; flex-direction: column; gap: 12px; margin-top: 22px; }
+.photo { width: 100%; aspect-ratio: 4 / 3; border-radius: 16px; border: var(--c-line); overflow: hidden; background: var(--c-bg-1); padding: 0; touch-action: manipulation; }
+.photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.lightbox { position: absolute; inset: 0; z-index: 3; background: rgba(17,17,17,.88); display: flex; align-items: center; justify-content: center; padding: 20px; animation: fade-in .6s; }
+.lightbox img { max-width: 100%; max-height: 100%; border-radius: 14px; }
 .letter-body { margin: 18px 0 0; font-size: 14px; line-height: 1.9; white-space: pre-wrap; }
 .letter-from { position: absolute; left: 22px; bottom: 28px; font-size: 13px; }
 .heart-fab { position: absolute; right: 22px; bottom: 22px; width: 60px; height: 60px; border-radius: 50%; background: #111; padding: 18px 16px; touch-action: manipulation; }
@@ -189,7 +195,7 @@ hr.dots { border: 0; border-top: 2px dotted #111; margin: 0; }
 .arrival-card p { margin: 10px 0 18px; font-size: 18px; line-height: 1.4; }
 
 .letter-screen { overflow: hidden; }
-.envelope { position: absolute; left: 40px; top: 305px; width: 280px; height: 190px; transition: opacity var(--close-ms,700ms), transform var(--close-ms,700ms); }
+.envelope { pointer-events: none; position: absolute; left: 40px; top: 305px; width: 280px; height: 190px; transition: opacity var(--close-ms,700ms), transform var(--close-ms,700ms); }
 .env-back { position: absolute; inset: 0; border-radius: 12px; background: #f3d8c8; box-shadow: 0 12px 30px rgba(0,0,0,.35); }
 .env-front { position: absolute; inset: 0; border-radius: 12px; z-index: 3; transition: opacity .6s, transform .8s;
   background: linear-gradient(135deg, #fff2e6 49.5%, transparent 50%) left/50% 100% no-repeat, linear-gradient(225deg, #fff2e6 49.5%, transparent 50%) right/50% 100% no-repeat,
@@ -198,19 +204,19 @@ hr.dots { border: 0; border-top: 2px dotted #111; margin: 0; }
   background: #ffdcc6; clip-path: polygon(0 0, 100% 0, 50% 100%); }
 .paper { position: absolute; z-index: 2; left: 14px; width: 252px; bottom: 14px; height: 150px; border-radius: 6px; background: var(--paper-bg); box-shadow: 0 2px 8px rgba(0,0,0,.2);
   transition: all calc(var(--open-ms,1500ms) * .55) cubic-bezier(.3,1.1,.4,1); overflow: hidden; }
-.paper-text { padding: 26px 24px; height: 100%; overflow-y: auto; white-space: pre-wrap; opacity: 0; transition: opacity .8s .2s;
+.paper-text { touch-action: pan-y; padding: 26px 24px; height: 100%; overflow-y: auto; white-space: pre-wrap; opacity: 0; transition: opacity .8s .2s;
   font-family: var(--letter-font); font-size: var(--letter-size); line-height: var(--letter-lh); color: var(--letter-color); text-align: var(--letter-align); }
-.finish { position: absolute; left: 50%; bottom: 48px; transform: translateX(-50%); transition: opacity .5s; }
+.finish { position: absolute; left: 0; right: 0; margin: 0 auto; width: max-content; bottom: 48px; transition: opacity .5s; }
 
 .step-envelope .envelope { opacity: 0; transform: scale(.7) translateY(30px); }
 .step-envelope .finish, .step-opening .finish { opacity: 0; }
 .step-opening .env-flap, .step-letter .env-flap, .step-closing .env-flap, .step-fade .env-flap { transform: rotateX(180deg); z-index: 1; }
 .step-opening .paper { bottom: 70px; }
 .step-letter .env-front, .step-closing .env-front, .step-fade .env-front { opacity: 0; transform: translateY(80px); }
-.step-letter .paper, .step-closing .paper, .step-fade .paper { left: -16px; width: 312px; bottom: 10px; height: 420px; transform: translateY(-20px); }
-.step-letter .envelope, .step-closing .envelope, .step-fade .envelope { top: 215px; }
+.step-letter .paper, .step-closing .paper, .step-fade .paper { left: -16px; width: 312px; bottom: 10px; height: 520px; }
+.step-letter .envelope { transform: translateY(215px); }
 .step-letter .paper-text, .step-closing .paper-text, .step-fade .paper-text { opacity: 1; }
-.step-closing .envelope, .step-fade .envelope { opacity: 0; transform: scale(.85) translateY(24px); }
+.step-closing .envelope, .step-fade .envelope { opacity: 0; transform: translateY(240px) scale(.92); }
 .step-closing .finish, .step-fade .finish { opacity: 0; pointer-events: none; }
 .blackout { position: absolute; inset: 0; background: #07060c; opacity: 0; pointer-events: none; transition: opacity var(--fade-ms,1100ms) ease; }
 .step-fade .blackout { opacity: 1; }

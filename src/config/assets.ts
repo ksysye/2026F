@@ -42,6 +42,8 @@ export const ASSETS = {
     heart: p('ui/heart.png'),
     collection: p('ui/collection.png'),
   },
+  /** 편지/쪽지/엽서 등에 첨부하는 사진: ASSETS.photo('파일명') → public/assets/photos/파일명 */
+  photo: (file: string) => p(`photos/${file}`),
   animations: {
     /** 캡슐 개봉 영상. 영상 파일을 넣고 경로를 지정하면 CSS 애니메이션 대신 재생됩니다. */
     capsuleOpening: null as string | null, // 예: p('animations/capsule-opening.mp4')
