@@ -80,14 +80,14 @@ async function moveTo(p, x) {
     await p.click('[data-slot=capsule-04]');
     ok(await p.locator('.detail-page').count() === 1, '보관함 상세 보기');
     await p.screenshot({ path: '/tmp/shots-collection.png' });
-    await p.click('[data-testid=detail-close]');
-    await p.click('[data-testid=col-close]');
+    await p.waitForTimeout(700); await p.click('[data-testid=detail-close]');
+    await p.waitForTimeout(700); await p.click('[data-testid=col-close]');
 
     // 새로고침 유지
     await p.reload(); await waitPhase(p, 'MACHINE_IDLE');
     await p.click('.collection-btn', { force: true }); await waitPhase(p, 'COLLECTION');
     ok((await p.textContent('[data-testid=count]')) === '1/4', '12. 새로고침 후에도 보관함 유지');
-    await p.click('[data-testid=col-close]');
+    await p.waitForTimeout(700); await p.click('[data-testid=col-close]');
 
     // 16. 나머지 3개 저장 → 수집 완료
     for (const [cap, x] of [['capsule-02', 249], ['capsule-01', 212], ['capsule-03', 286]]) {
