@@ -8,7 +8,8 @@
   --c-ink: #111111;
   --c-primary: #111111;
   --c-sub: #ffffff;
-  --c-frame: #ffe1e6; /* 인형뽑기 본체 색 (제공된 색상 이미지 기준) */
+  --c-frame: #ffe1e6; /* 인형뽑기 본체 색 */
+  --c-glass: #fdf2f6; /* 인형뽑기 통(유리 안쪽) 색 */
   --c-line: 1.5px solid #111;
   --font: 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', system-ui, sans-serif;
   --font-dot: 'DotGothic16', 'Courier New', monospace;
@@ -74,7 +75,7 @@ hr.dots { border: 0; border-top: 2px dotted #111; margin: 0; }
 .m-strip { position: absolute; border-radius: 14px; background: #fff; border: var(--c-line);
   background-image: radial-gradient(circle, #111 0 3px, transparent 3.5px), radial-gradient(circle, #f6b9d0 0 3px, transparent 3.5px);
   background-size: 33px 100%, 33px 100%; background-position: 16px 50%, 32px 50%; background-repeat: repeat-x; }
-.m-glass-back { position: absolute; border-radius: 20px; background: #fff; border: var(--c-line); }
+.m-glass-back { position: absolute; border-radius: 20px; background: var(--c-glass); border: var(--c-line); }
 .m-floor { position: absolute; height: 0; border-top: 1.5px dotted #111; }
 .m-outlet { position: absolute; border-radius: 22px; border: var(--c-line); background: #fff;
   background-image: radial-gradient(circle, #f6b9d0 0 1.6px, transparent 2px); background-size: 12px 12px; background-position: 6px 6px; transition: background-color .6s; }
