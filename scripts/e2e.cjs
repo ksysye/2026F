@@ -44,11 +44,11 @@ async function moveTo(p, x) {
     ok(await hearts(p) === 3, '초기 하트 3개');
     await p.screenshot({ path: '/tmp/shots-machine.png' });
 
-    await moveTo(p, 100); const x1 = await clawX(p);
+    await moveTo(p, 90); const x1 = await clawX(p);
     await moveTo(p, 400); const x2 = await clawX(p);
-    ok(x1 < 120 && x2 <= 308.01, `3. 집게 좌우 이동 및 범위 제한 (${x1.toFixed(0)} / ${x2.toFixed(0)})`);
+    ok(x1 < 110 && x2 <= 296.01, `3. 집게 좌우 이동 및 범위 제한 (${x1.toFixed(0)} / ${x2.toFixed(0)})`);
 
-    await moveTo(p, 187);
+    await moveTo(p, 249);
     await p.keyboard.press('Space');
     await p.waitForTimeout(300);
     ok(['CLAW_GRABBING', 'CLAW_RETURNING'].includes(await phase(p)), '집게 작동 중 phase 전환');
@@ -62,23 +62,23 @@ async function moveTo(p, x) {
     await p.screenshot({ path: '/tmp/shots-reward.png' });
     await p.click('[data-testid=close]');
     await waitPhase(p, 'MACHINE_IDLE');
-    ok(await p.locator('[data-capsule=capsule-02]').count() === 1, '10. 닫기 → 캡슐 기계로 복귀');
+    ok(await p.locator('[data-capsule=capsule-04]').count() === 1, '10. 닫기 → 캡슐 기계로 복귀');
     ok(await hearts(p) === 3, '닫기 시 하트 차감 없음');
     await p.click('.collection-btn', { force: true }); await waitPhase(p, 'COLLECTION');
     ok((await p.textContent('[data-testid=count]')) === '0/4', '닫기 후 보관함에 미등록 (0/4)');
     await p.click('[data-testid=col-close]'); await waitPhase(p, 'MACHINE_IDLE');
 
-    await moveTo(p, 187); await p.keyboard.press('Space');
+    await moveTo(p, 249); await p.keyboard.press('Space');
     await waitPhase(p, 'REWARD_REVEAL', 30000);
     const name2 = await p.textContent('.reward-display h2');
     ok(name1 === name2, `11. 같은 캡슐 → 같은 보상 (${name1} / ${name2})`);
     await p.click('[data-testid=save]');
     await waitPhase(p, 'MACHINE_IDLE');
-    ok(await p.locator('[data-capsule=capsule-02]').count() === 0, '9. 저장 후 캡슐이 기계에서 제거');
+    ok(await p.locator('[data-capsule=capsule-04]').count() === 0, '9. 저장 후 캡슐이 기계에서 제거');
     await p.click('.collection-btn', { force: true }); await waitPhase(p, 'COLLECTION');
     ok((await p.textContent('[data-testid=count]')) === '1/4', '8. 저장 → 보관함 1/4');
-    await p.click('[data-slot=capsule-02]');
-    ok(await p.locator('.detail').count() === 1, '보관함 상세 보기');
+    await p.click('[data-slot=capsule-04]');
+    ok(await p.locator('.detail-page').count() === 1, '보관함 상세 보기');
     await p.screenshot({ path: '/tmp/shots-collection.png' });
     await p.click('[data-testid=detail-close]');
     await p.click('[data-testid=col-close]');
@@ -90,7 +90,7 @@ async function moveTo(p, x) {
     await p.click('[data-testid=col-close]');
 
     // 16. 나머지 3개 저장 → 수집 완료
-    for (const [cap, x] of [['capsule-01', 134], ['capsule-03', 240], ['capsule-04', 293]]) {
+    for (const [cap, x] of [['capsule-02', 249], ['capsule-01', 212], ['capsule-03', 286]]) {
       await moveTo(p, x); await p.keyboard.press('Space');
       await waitPhase(p, 'REWARD_REVEAL', 30000);
       await p.click('[data-testid=save]'); await waitPhase(p, 'MACHINE_IDLE');
@@ -107,7 +107,7 @@ async function moveTo(p, x) {
     await waitPhase(p, 'MACHINE_IDLE');
     const rewardsBefore = await p.locator('[data-capsule]').count();
     for (const expected of [2, 1, 0]) {
-      await moveTo(p, 187); await p.keyboard.press('Space');
+      await moveTo(p, 249); await p.keyboard.press('Space');
       if (expected > 0) await waitPhase(p, 'MACHINE_IDLE', 30000);
       else await waitPhase(p, 'MESSAGE_ARRIVAL', 30000);
       ok(await hearts(p) === expected, `4. 실패 → 하트 ${expected}개`);

@@ -11,8 +11,8 @@ export function LetterScreen({ onFinish }: { onFinish: () => void }) {
   const text = ENDING_CONFIG.finalMessage.trim() ? ENDING_CONFIG.finalMessage : ENDING_CONFIG.placeholderMessage;
 
   useEffect(() => {
-    const a = window.setTimeout(() => setStep('opening'), 350);
-    const b = window.setTimeout(() => setStep('letter'), 350 + T.letterOpen);
+    const a = window.setTimeout(() => setStep('opening'), 700);
+    const b = window.setTimeout(() => setStep('letter'), 700 + T.letterOpen);
     return () => { clearTimeout(a); clearTimeout(b); };
   }, []);
 

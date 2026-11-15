@@ -1,24 +1,60 @@
 import { useState } from 'react';
-import { CAPSULES, getReward } from '../config/rewards';
+import { CAPSULES, LETTER_TO, getReward } from '../config/rewards';
 import { activeCapsules, useGame } from '../game/store';
+import { PlaceholderHeart } from './placeholders';
 import { RewardVisual } from './RewardVisual';
+import { useClickGuard } from './useReady';
 
-/** 보관함: 4개 슬롯(저장한 것만 공개, 나머지는 실루엣). 하트 0이어도 접근 가능(엔딩 전). */
+const BackButton = ({ onClick, testId }: { onClick: () => void; testId: string }) => (
+  <button type="button" className="back-btn" aria-label="뒤로" data-testid={testId} onClick={onClick}>
+    <svg viewBox="0 0 24 24" width="55%" height="55%"><path d="M15 5l-7 7 7 7" fill="none" stroke="#111" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round" /></svg>
+  </button>
+);
+
+/** 보관함(시안): 열어 본 메시지 n/4, 2x2 카드. 저장한 카드를 누르면 편지지 상세. */
 export function CollectionScreen() {
   const { state, dispatch, collectedCount, totalCount } = useGame();
   const [detail, setDetail] = useState<string | null>(null);
+  const [pop, setPop] = useState(false);
+  const guard = useClickGuard();
   const complete = collectedCount === totalCount;
-  return (
-    <div className={`overlay collection ${complete ? 'complete' : ''}`}>
-      <div className="col-head">
-        <span className="count" data-testid="count">{collectedCount}/{totalCount}</span>
-        {complete && <span className="done-star" aria-label="수집 완료">★</span>}
+
+  if (detail && state.saved[detail]) {
+    const reward = getReward(state.saved[detail]);
+    return (
+      <div className="overlay collection detail-page" key="detail">
+        <div className="col-top">
+          <BackButton testId="detail-close" onClick={guard(() => setDetail(null))} />
+          <h1>{reward.name}</h1>
+        </div>
+        <div className="letter-card">
+          <div className="letter-to">FOR<br />{LETTER_TO}</div>
+          <hr className="dots" />
+          <p className="letter-body">{reward.message}</p>
+          <div className="letter-from">— {reward.sender}</div>
+          <button type="button" className={`heart-fab ${pop ? 'pop' : ''}`} aria-label="하트" onClick={() => { setPop(false); requestAnimationFrame(() => setPop(true)); }}>
+            <PlaceholderHeart color="#fff" />
+          </button>
+        </div>
       </div>
+    );
+  }
+
+  return (
+    <div className={`overlay collection ${complete ? 'complete' : ''}`} key="list">
+      <div className="col-top">
+        <BackButton testId="col-close" onClick={guard(() => dispatch({ type: 'CLOSE_COLLECTION' }))} />
+        <h1>보관함</h1>
+      </div>
+      <div className="col-meta">
+        <span>열어 본 메시지</span>
+        <span className="count dot-font" data-testid="count">{collectedCount}/{totalCount}</span>
+      </div>
+      <hr className="dots" />
       <div className="col-grid">
-        {activeCapsules().map((c) => {
-          const rid = state.saved[c.id] ?? CAPSULES.find((x) => x.id === c.id)!.rewardId;
-          const reward = getReward(rid);
+        {activeCapsules().map((c, i) => {
           const got = !!state.saved[c.id];
+          const reward = getReward(state.saved[c.id] ?? CAPSULES.find((x) => x.id === c.id)!.rewardId);
           return (
             <button
               key={c.id}
@@ -27,26 +63,16 @@ export function CollectionScreen() {
               data-slot={c.id}
               data-got={got}
               disabled={!got}
-              onClick={() => setDetail(c.id)}
+              onClick={guard(() => setDetail(c.id))}
             >
-              <div className="slot-img"><RewardVisual reward={reward} silhouette={!got} /></div>
-              {got && <span className="slot-name">{reward.name}</span>}
+              <span className="slot-no dot-font">{String(i + 1).padStart(2, '0')}</span>
+              {!got && <span className="slot-dot" />}
+              <div className="slot-img"><RewardVisual reward={reward} /></div>
+              <span className="slot-name">{reward.name}</span>
             </button>
           );
         })}
       </div>
-      <button type="button" className="pill" data-testid="col-close" onClick={() => dispatch({ type: 'CLOSE_COLLECTION' })}>닫기</button>
-
-      {detail && state.saved[detail] && (
-        <div className="detail" onClick={() => setDetail(null)}>
-          <div className="detail-card" onClick={(e) => e.stopPropagation()}>
-            <div className="detail-img"><RewardVisual reward={getReward(state.saved[detail])} /></div>
-            <h2>{getReward(state.saved[detail]).name}</h2>
-            <p>{getReward(state.saved[detail]).description}</p>
-            <button type="button" className="pill" data-testid="detail-close" onClick={() => setDetail(null)}>닫기</button>
-          </div>
-        </div>
-      )}
     </div>
   );
 }

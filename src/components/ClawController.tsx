@@ -9,10 +9,10 @@ export function ClawController({ x, y, grip }: { x: number; y: number; grip: num
   const w = L.claw.w, h = L.claw.h;
   return (
     <>
-      <div className="rail" style={{ left: L.glass.x + 6, width: L.glass.w - 12, top: L.railY - 5 }} />
-      <div className="carriage" style={{ left: x - 14, top: L.railY - 8 }} />
-      <div className="cable" style={{ left: x - 1.5, top: L.railY, height: Math.max(0, y - L.railY) }} />
-      <div className="claw" style={{ left: x - w / 2, top: y - 14, width: w, height: h }} data-claw-x={x.toFixed(1)} data-claw-y={y.toFixed(1)}>
+      <div className="rail" style={{ left: L.railX.min, width: L.railX.max - L.railX.min, top: L.railY - 0.75 }} />
+      <div className="cable" style={{ left: x - 0.75, top: L.railY, height: Math.max(0, y - L.railY - 6) }} />
+      <div className="carriage" style={{ left: x - 15, top: L.railY - 8 }} />
+      <div className="claw" style={{ left: x - w / 2, top: y - 6, width: w, height: h }} data-claw-x={x.toFixed(1)} data-claw-y={y.toFixed(1)}>
         <AssetImage
           src={closed ? ASSETS.machine.clawClosed : ASSETS.machine.claw}
           fallback={

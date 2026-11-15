@@ -20,7 +20,11 @@ export interface RewardDef {
   name: string;
   description: string;
   color: string;
-  shape: 'star' | 'moon' | 'flower' | 'cloud';
+  shape: 'letter' | 'invitation' | 'note' | 'postcard';
+  /** 보관함 상세(편지지)에 표시되는 본문 */
+  message: string;
+  /** 보내는 사람 */
+  sender: string;
 }
 
 /** 저장되는 "확정" 상태. 진행 중(IN_PROGRESS) 같은 일시 상태는 저장하지 않음. */

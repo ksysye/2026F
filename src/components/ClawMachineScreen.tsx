@@ -83,8 +83,12 @@ export function ClawMachineScreen() {
     let best = Infinity;
     for (const c of activeCapsules()) {
       if (statusRef.current(c.id) !== 'AVAILABLE') continue;
-      const d = Math.abs(L.capsules[c.id].x - startX);
-      if (d < best) { best = d; target = { id: c.id, rewardId: c.rewardId, x: L.capsules[c.id].x, y: L.capsules[c.id].y }; }
+      const cp = L.capsules[c.id];
+      const d = Math.abs(cp.x - startX);
+      // 가장 가까운 캡슐. 같은 열에 쌓여 있으면 위쪽 캡슐이 먼저 잡힘
+      if (d < best - 0.5 || (Math.abs(d - best) <= 0.5 && target && cp.y < target.y)) {
+        best = d; target = { id: c.id, rewardId: c.rewardId, x: cp.x, y: cp.y };
+      }
     }
     const inRange = !!target && best <= GAME_CONFIG.grabRange;
     const success = inRange && Math.random() < s.settings.successProbability;
@@ -170,6 +174,7 @@ export function ClawMachineScreen() {
 
   const interactive = ['MACHINE_IDLE', 'CLAW_MOVING'].includes(state.phase);
   const controlsOff = !interactive || state.hearts <= 0;
+  const outletActive = carryId !== null || Object.keys(offsets).length > 0;
   const carry = carryId ? { id: carryId, x: claw.x, y: claw.y + L.carryOffset } : null;
 
   return (
@@ -183,11 +188,12 @@ export function ClawMachineScreen() {
         style={rectStyle(L.machineImage)}
         fallback={
           <>
-            <div className="m-frame" style={rectStyle(L.frame)}><div className="m-top" /></div>
+            <div className="m-frame" style={rectStyle(L.frame)} />
+            <div className="m-strip" style={rectStyle(L.topStrip)} />
             <div className="m-glass-back" style={rectStyle(L.glass)} />
-            <div className="m-floor" style={{ left: L.glass.x, width: L.glass.w, top: L.floorY - 4 }} />
-            <div className="m-outlet" style={rectStyle(L.outlet)}><div className="m-outlet-flap" /></div>
-            <div className="m-panel" style={{ left: L.frame.x + 8, width: L.frame.w - 16, top: 520, height: 78 }} />
+            <div className="m-floor" style={{ left: L.glass.x + 14, width: L.glass.w - 28, top: L.floorY }} />
+            <div className={`m-outlet ${outletActive ? 'active' : ''}`} style={rectStyle(L.outlet)} />
+            <div className="m-divider" style={{ left: L.glass.x, width: L.glass.w, top: L.dividerY }} />
           </>
         }
       />
@@ -209,7 +215,7 @@ export function ClawMachineScreen() {
           onClick={() => dispatch({ type: 'OPEN_COLLECTION' })}
         >
           <AssetImage src={ASSETS.ui.collection} fallback={<PlaceholderCollectionIcon />} />
-          <span className="badge">{collectedCount}</span>
+          <span className="badge">{totalCount - collectedCount}</span>
         </button>
       </div>
       <HeartDisplay />

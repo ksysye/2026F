@@ -10,7 +10,7 @@ export function HeartDisplay() {
     <div className="hearts" aria-label={`하트 ${state.hearts}개`}>
       {Array.from({ length: state.settings.maxHearts }, (_, i) => (
         <div key={i} className={`heart ${i < state.hearts ? 'on' : 'off'}`}>
-          <AssetImage src={ASSETS.ui.heart} fallback={<PlaceholderHeart />} />
+          <AssetImage src={ASSETS.ui.heart} fallback={<PlaceholderHeart color={i < state.hearts ? '#111' : '#e6a9c2'} />} />
         </div>
       ))}
     </div>
