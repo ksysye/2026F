@@ -42,7 +42,21 @@ const clampHearts = (h: number, max: number) => Math.max(0, Math.min(max, Math.r
 
 export const activeCapsules = (): CapsuleDef[] => CAPSULES.slice(0, GAME_CONFIG.capsuleCount);
 
+/**
+ * 개발자용 숨김 초기화: 주소 끝에 #reset 을 붙여 열면 저장 데이터를 지우고 처음부터 시작.
+ * 기본은 꺼져 있고(일반 사용자 노출 없음), 테스트 배포본에서만 window.__ALLOW_HASH_RESET=true 로 켭니다.
+ */
+function maybeHashReset() {
+  try {
+    if ((window as { __ALLOW_HASH_RESET?: boolean }).__ALLOW_HASH_RESET && window.location.hash === '#reset') {
+      storage.clear();
+      history.replaceState(null, '', window.location.pathname + window.location.search);
+    }
+  } catch { /* ignore */ }
+}
+
 function initState(): GameState {
+  maybeHashReset();
   const settings = loadSettings();
   const p = storage.load();
   const validIds = new Set(activeCapsules().map((c) => c.id));
