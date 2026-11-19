@@ -176,8 +176,8 @@ hr.dots { border: 0; border-top: 2px dotted #111; margin: 0; }
 .letter-to { font-family: var(--font-dot); font-size: 40px; line-height: 1.05; letter-spacing: 3px; margin-bottom: 18px; }
 .letter-scroll { position: absolute; left: 22px; right: 22px; top: 26px; bottom: 80px; overflow-y: auto; touch-action: pan-y; padding-right: 2px; }
 .photos { display: flex; flex-direction: column; gap: 12px; margin-top: 22px; }
-.photo { width: 100%; aspect-ratio: 4 / 3; border-radius: 16px; border: var(--c-line); overflow: hidden; background: var(--c-bg-1); padding: 0; touch-action: manipulation; }
-.photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.photo { width: 100%; border-radius: 16px; border: var(--c-line); overflow: hidden; background: var(--c-bg-1); padding: 0; touch-action: manipulation; }
+.photo img { width: 100%; height: auto; display: block; }
 .lightbox { position: absolute; inset: 0; z-index: 3; background: rgba(17,17,17,.88); display: flex; align-items: center; justify-content: center; padding: 20px; animation: fade-in .6s; }
 .lightbox img { max-width: 100%; max-height: 100%; border-radius: 14px; }
 .letter-body { margin: 18px 0 0; font-size: 14px; line-height: 1.9; white-space: pre-wrap; }

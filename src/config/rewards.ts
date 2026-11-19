@@ -1,4 +1,5 @@
 import type { CapsuleDef, RewardDef } from '../game/types';
+import { ASSETS } from './assets';
 
 /** 편지를 받는 사람 (편지지 상단 "FOR ..." 에 표시) */
 export const LETTER_TO = 'JIHO';
@@ -15,7 +16,7 @@ const LETTER_04 = '생일 선물\n\n생일이 수능이랑 너무 가까워서\n
  */
 export const REWARDS: RewardDef[] = [
   { id: 'reward-01', name: '편지 01', description: '생일 축하 편지', color: '#111111', shape: 'letter', message: LETTER_01, sender: SENDER, photos: [] },
-  { id: 'reward-02', name: '초대장 02', description: '미국 여행 티켓', color: '#111111', shape: 'invitation', message: LETTER_02, sender: SENDER, photos: [] },
+  { id: 'reward-02', name: '초대장 02', description: '미국 여행 티켓', color: '#111111', shape: 'invitation', message: LETTER_02, sender: SENDER, photos: [ASSETS.photo('reward-02-ticket.png')] },
   { id: 'reward-03', name: '쪽지 03', description: '같이 밥 묵자', color: '#111111', shape: 'note', message: LETTER_03, sender: SENDER, photos: [] },
   { id: 'reward-04', name: '엽서 04', description: '생일 선물', color: '#111111', shape: 'postcard', message: LETTER_04, sender: SENDER, photos: [] },
 ];
