@@ -22,3 +22,11 @@
   - `notes/<key>`: 사용자 메모. `meta/briefing`: syncedAt, gradesAt, suggestions[]
 - "캘린더 동기화" 요청 시: `dirty:true` 항목을 Google 캘린더에 생성/수정/삭제(`deleted:true`)한 뒤 `dirty`를 해제하고 `gcalId`를 기록
 - 성적은 myETL에서 읽기만 한다. 제출·성적·댓글 수정 같은 쓰기 작업은 하지 않는다.
+
+## 독립 웹사이트 (정적 빌드)
+
+- `site/build_standalone.py`가 `site/index.html`을 단일 파일 정적 사이트로 만든다 (claude.ai의 db 대신 데이터 스냅샷 + 브라우저 localStorage)
+- 공개용(성적 제외): `python3 site/build_standalone.py --data <export 폴더> --out <파일>`
+- 개인용(성적 포함): 위 명령에 `--grades`. 개인용 파일은 저장소에 올리지 않는다(`.gitignore`의 `_private_full.html`)
+- `<export 폴더>`: 사이트 DB를 `ArtifactData list`의 `out_dir`로 내려받은 컬렉션별 폴더(items/, courses/, plans/, grades/, meta/)
+- 공개용을 웹에 올리면 일정·과목명이 노출되므로 올리기 전에 사용자 확인을 받는다

@@ -562,7 +562,7 @@ details.sec li, ul.lines li { margin: 3px 0; overflow-wrap: anywhere; }
     var f = document.createDocumentFragment();
     f.append(h("section", null, h("p", { class: "eyebrow num", text: a[0] + "년 " + Number(a[1]) + "월 " + Number(a[2]) + "일 " + wdOf(t) + "요일" }), h("h1", { class: "page", text: "오늘의 브리핑" })));
     f.append(buildBrief());
-    f.append(h("div", { class: "cols" }, buildTimeline(), h("aside", { class: "side" }, gradeBrief(), courseList(), buildAsk())));
+    f.append(h("div", { class: "cols" }, buildTimeline(), h("aside", { class: "side" }, Object.keys(state.grades).length ? gradeBrief() : null, courseList(), buildAsk())));
     return f;
   }
 
@@ -785,7 +785,9 @@ details.sec li, ul.lines li { margin: 3px 0; overflow-wrap: anywhere; }
   function renderNav() {
     var r = curRoute(), nav = $("#nav"), sub = $("#navCourses");
     nav.replaceChildren(); sub.replaceChildren();
-    [["home", "오늘"], ["week", "주간 계획"], ["calendar", "캘린더"], ["grades", "성적"]].forEach(function (x) {
+    var tabs = [["home", "오늘"], ["week", "주간 계획"], ["calendar", "캘린더"]];
+    if (Object.keys(state.grades).length) tabs.push(["grades", "성적"]);
+    tabs.forEach(function (x) {
       nav.append(h("a", { class: "tab", href: "#" + x[0], "aria-current": r === x[0] ? "page" : null, text: x[1] }));
     });
     courseKeys().forEach(function (k) {
