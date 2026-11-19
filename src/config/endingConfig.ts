@@ -10,7 +10,7 @@ export const ENDING_CONFIG = {
   arrivalMessage: '메세지 창이 도착했습니다!',
 
   /** 추후 실제 메시지 입력 (줄바꿈은 \n) */
-  finalMessage: '너 지금까지 누구보다 열심히 한 거 잘 알아.\n\n가뜩이나 이번 년 여러 이슈도 많아서 공부하는 너도 많이 화도 났을텐데 난 karma가 존재한다 생각해.\n\n너무너무 수고많았고 오늘 푹 쉬어.',
+  finalMessage: '너 지금까지 누구보다 열심히 한 거 잘 알아.\n\n가뜩이나 이번 년 여러 이슈도 많아서 공부하는 너도 많이 화도 났을텐데 난 karma가 존재한다 생각해.\n\n너무너무 수고많았고 오늘 푹 쉬어.\n\n— 신예',
   placeholderMessage: '여기에 전하고 싶은 메시지가 들어갑니다.\n\n(개발자: src/config/endingConfig.ts 의 finalMessage 를 수정하세요.)',
 
   messageButtonText: '메시지 확인하기',
