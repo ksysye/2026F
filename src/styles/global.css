@@ -195,31 +195,16 @@ hr.dots { border: 0; border-top: 2px dotted #111; margin: 0; }
 @keyframes bob { 50% { transform: translateY(-6px) rotate(-4deg); } }
 .arrival-card p { margin: 10px 0 18px; font-size: 18px; line-height: 1.4; }
 
-.letter-screen { overflow: hidden; }
-.envelope { pointer-events: none; position: absolute; left: 40px; top: 305px; width: 280px; height: 190px; transition: opacity var(--close-ms,700ms), transform var(--close-ms,700ms); }
-.env-back { position: absolute; inset: 0; border-radius: 12px; background: #f3d8c8; box-shadow: 0 12px 30px rgba(0,0,0,.35); }
-.env-front { position: absolute; inset: 0; border-radius: 12px; z-index: 3; transition: opacity .6s, transform .8s;
-  background: linear-gradient(135deg, #fff2e6 49.5%, transparent 50%) left/50% 100% no-repeat, linear-gradient(225deg, #fff2e6 49.5%, transparent 50%) right/50% 100% no-repeat,
-              linear-gradient(0deg, #ffe6d4 0 55%, transparent 55%); filter: drop-shadow(0 -2px 3px rgba(0,0,0,.08)); }
-.env-flap { position: absolute; left: 0; right: 0; top: 0; height: 100px; z-index: 4; transform-origin: top center; transition: transform calc(var(--open-ms,1500ms) * .35) ease-in-out;
-  background: #ffdcc6; clip-path: polygon(0 0, 100% 0, 50% 100%); }
-.paper { position: absolute; z-index: 2; left: 14px; width: 252px; bottom: 14px; height: 150px; border-radius: 6px; background: var(--paper-bg); box-shadow: 0 2px 8px rgba(0,0,0,.2);
-  transition: all calc(var(--open-ms,1500ms) * .55) cubic-bezier(.3,1.1,.4,1); overflow: hidden; }
-.paper-text { touch-action: pan-y; padding: 26px 24px; height: 100%; overflow-y: auto; white-space: pre-wrap; opacity: 0; transition: opacity .8s .2s;
+.letter-screen { z-index: 8; background: var(--letter-bg); overflow: hidden; animation: fade-in 1.6s ease; }
+.letter-screen .message { position: absolute; left: 34px; right: 34px; top: 0; bottom: 130px; display: flex; flex-direction: column; justify-content: center; gap: 28px; transition: opacity var(--close-ms, 1000ms); }
+.letter-screen .message p { margin: 0; white-space: pre-wrap; opacity: 0; transform: translateY(10px); animation: line-in 1.4s ease forwards;
   font-family: var(--letter-font); font-size: var(--letter-size); line-height: var(--letter-lh); color: var(--letter-color); text-align: var(--letter-align); }
-.finish { position: absolute; left: 0; right: 0; margin: 0 auto; width: max-content; bottom: 48px; transition: opacity .5s; }
-
-.step-envelope .envelope { opacity: 0; transform: scale(.7) translateY(30px); }
-.step-envelope .finish, .step-opening .finish { opacity: 0; }
-.step-opening .env-flap, .step-letter .env-flap, .step-closing .env-flap, .step-fade .env-flap { transform: rotateX(180deg); z-index: 1; }
-.step-opening .paper { bottom: 70px; }
-.step-letter .env-front, .step-closing .env-front, .step-fade .env-front { opacity: 0; transform: translateY(80px); }
-.step-letter .paper, .step-closing .paper, .step-fade .paper { left: -16px; width: 312px; bottom: 10px; height: 520px; }
-.step-letter .envelope { transform: translateY(215px); }
-.step-letter .paper-text, .step-closing .paper-text, .step-fade .paper-text { opacity: 1; }
-.step-closing .envelope, .step-fade .envelope { opacity: 0; transform: translateY(240px) scale(.92); }
+@keyframes line-in { to { opacity: 1; transform: none; } }
+.finish { position: absolute; left: 0; right: 0; margin: 0 auto; width: max-content; bottom: 60px; transition: opacity 1s; }
+.finish:disabled { opacity: 0; }
+.step-closing .message, .step-fade .message { opacity: 0; }
 .step-closing .finish, .step-fade .finish { opacity: 0; pointer-events: none; }
-.blackout { position: absolute; inset: 0; background: #07060c; opacity: 0; pointer-events: none; transition: opacity var(--fade-ms,1100ms) ease; }
+.blackout { position: absolute; inset: 0; background: var(--c-bg-1); opacity: 0; pointer-events: none; transition: opacity var(--fade-ms, 1100ms) ease; }
 .step-fade .blackout { opacity: 1; }
 
 .ending-screen { position: absolute; inset: 0; z-index: 9; display: flex; align-items: center; justify-content: center; background: radial-gradient(circle at 50% 45%, #2b2150, #07060c 75%); color: #fff; animation: fade-in 1.6s ease; }
@@ -237,7 +222,7 @@ hr.dots { border: 0; border-top: 2px dotted #111; margin: 0; }
 .devpanel button { padding: 4px 6px; border-radius: 6px; font-size: 12px; }
 
 /* 엔딩 후 앱 둘러보기: 검정에서 서서히 밝아지며 복귀 */
-.from-black { position: absolute; inset: 0; z-index: 20; background: #07060c; pointer-events: none; animation: from-black 2s ease forwards; }
+.from-black { position: absolute; inset: 0; z-index: 20; background: var(--c-bg-1); pointer-events: none; animation: from-black 2s ease forwards; }
 @keyframes from-black { 0% { opacity: 1; } 100% { opacity: 0; } }
 
 /* ---------- 입장 암호 ---------- */

@@ -1,7 +1,7 @@
 /**
  * 엔딩(메시지 도착) 설정
  * finalMessage 에 실제 편지 내용을 입력하세요. 비어 있으면 placeholderMessage 가 표시됩니다.
- * 글꼴/색/종이 배경은 letterStyle 에서 바꿉니다. (이미지 사용 시 paperImage)
+ * 글꼴/색/배경은 letterStyle 에서 바꿉니다. (이미지 사용 시 backgroundImage)
  */
 export const ENDING_CONFIG = {
   /** 이 하트 수 이하가 되면 엔딩 시작 */
@@ -29,14 +29,17 @@ export const ENDING_CONFIG = {
   allowUserReset: false,
   persistEnding: true,
 
+  /** 엔딩 메시지 화면(분홍 배경 위에 글이 차례로 나타남) 스타일 */
   letterStyle: {
-    fontFamily: "'Nanum Pen Script','Gamja Flower','Apple SD Gothic Neo','Noto Sans KR',system-ui,sans-serif",
-    fontSize: '17px',
-    lineHeight: '1.7',
-    color: '#5b4636',
+    fontFamily: "'Apple SD Gothic Neo','Noto Sans KR','Malgun Gothic',system-ui,sans-serif",
+    fontSize: '18px',
+    lineHeight: '1.9',
+    color: '#111111',
     textAlign: 'left' as 'left' | 'center',
-    paperBackground: '#fffaf0',
-    /** 편지지 이미지 (예: assets/ending/paper.png). null이면 위 색상 사용 */
-    paperImage: null as string | null,
+    background: '#fde7f1',
+    /** 배경 이미지 (예: assets/ending/bg.png). null 이면 위 색상 사용 */
+    backgroundImage: null as string | null,
+    /** 문단이 나타나는 간격(ms) */
+    paragraphDelay: 1500,
   },
 } as const;
