@@ -18,8 +18,52 @@
     "title": "과제 2 [Due: 2026.10.12(월)]",
     "due": "2026-10-12T23:59:59+09:00",
     "url": "https://myetl.snu.ac.kr/courses/305166/assignments/380716",
-    "status": "unchanged",
+    "status": "past",
     "hash": "{\"due\": \"2026-10-12T23:59:59+09:00\", \"title\": \"\\uacfc\\uc81c 2 [Due: 2026.10.12(\\uc6d4)]\"}"
+  },
+  {
+    "key": "305166-assignment-386513",
+    "course_id": 305166,
+    "course": "2026-2 물리학 2 (009)",
+    "kind": "assignment",
+    "title": "과제 3 [Due: 2026.11.01(일)]",
+    "due": "2026-11-01T23:59:59+09:00",
+    "url": "https://myetl.snu.ac.kr/courses/305166/assignments/386513",
+    "status": "past",
+    "hash": "{\"due\": \"2026-11-01T23:59:59+09:00\", \"title\": \"\\uacfc\\uc81c 3 [Due: 2026.11.01(\\uc77c)]\"}"
+  },
+  {
+    "key": "305166-assignment-390551",
+    "course_id": 305166,
+    "course": "2026-2 물리학 2 (009)",
+    "kind": "assignment",
+    "title": "과제 4 [Due: 2026.11.22(일)]",
+    "due": "2026-11-22T23:59:59+09:00",
+    "url": "https://myetl.snu.ac.kr/courses/305166/assignments/390551",
+    "status": "new",
+    "hash": "{\"due\": \"2026-11-22T23:59:59+09:00\", \"title\": \"\\uacfc\\uc81c 4 [Due: 2026.11.22(\\uc77c)]\"}"
+  },
+  {
+    "key": "303619-assignment-390059",
+    "course_id": 303619,
+    "course": "2026-2 역사와 역사 재현 (001)",
+    "kind": "assignment",
+    "title": "견학보고서 과제",
+    "due": "2026-11-15T23:59:59+09:00",
+    "url": "https://myetl.snu.ac.kr/courses/303619/assignments/390059",
+    "status": "past",
+    "hash": "{\"due\": \"2026-11-15T23:59:59+09:00\", \"title\": \"\\uacac\\ud559\\ubcf4\\uace0\\uc11c \\uacfc\\uc81c\"}"
+  },
+  {
+    "key": "309547-assignment-384077",
+    "course_id": 309547,
+    "course": "2026-2 인간생명과학개론 (001)",
+    "kind": "assignment",
+    "title": "보고서 (학내 보건진료소에서 검진 후, 결과를 바탕으로 작성) 12/20까지 제출",
+    "due": "2026-12-20T23:59:59+09:00",
+    "url": "https://myetl.snu.ac.kr/courses/309547/assignments/384077",
+    "status": "new",
+    "hash": "{\"due\": \"2026-12-20T23:59:59+09:00\", \"title\": \"\\ubcf4\\uace0\\uc11c (\\ud559\\ub0b4 \\ubcf4\\uac74\\uc9c4\\ub8cc\\uc18c\\uc5d0\\uc11c \\uac80\\uc9c4 \\ud6c4, \\uacb0\\uacfc\\ub97c \\ubc14\\ud0d5\\uc73c\\ub85c \\uc791\\uc131) 12/20\\uae4c\\uc9c0 \\uc81c\\ucd9c\"}"
   },
   {
     "key": "309547-assignment-373945",
@@ -62,8 +106,52 @@
     "title": "HW#4 (Due : 10/14)",
     "due": "2026-10-14T23:59:59+09:00",
     "url": "https://myetl.snu.ac.kr/courses/305788/assignments/380559",
-    "status": "unchanged",
+    "status": "past",
     "hash": "{\"due\": \"2026-10-14T23:59:59+09:00\", \"title\": \"HW#4 (Due : 10/14)\"}"
+  },
+  {
+    "key": "305788-assignment-384749",
+    "course_id": 305788,
+    "course": "2026-2 조선해양공학의 이해 (001)",
+    "kind": "assignment",
+    "title": "HW#5 (Due : 10/21)",
+    "due": "2026-10-21T23:59:59+09:00",
+    "url": "https://myetl.snu.ac.kr/courses/305788/assignments/384749",
+    "status": "past",
+    "hash": "{\"due\": \"2026-10-21T23:59:59+09:00\", \"title\": \"HW#5 (Due : 10/21)\"}"
+  },
+  {
+    "key": "305788-assignment-388115",
+    "course_id": 305788,
+    "course": "2026-2 조선해양공학의 이해 (001)",
+    "kind": "assignment",
+    "title": "HW#6 & 7 (Due : 11/02)",
+    "due": "2026-11-02T23:59:59+09:00",
+    "url": "https://myetl.snu.ac.kr/courses/305788/assignments/388115",
+    "status": "past",
+    "hash": "{\"due\": \"2026-11-02T23:59:59+09:00\", \"title\": \"HW#6 & 7 (Due : 11/02)\"}"
+  },
+  {
+    "key": "305788-assignment-390516",
+    "course_id": 305788,
+    "course": "2026-2 조선해양공학의 이해 (001)",
+    "kind": "assignment",
+    "title": "HW#8 & 9 (Due : 11/09)",
+    "due": "2026-11-09T23:59:59+09:00",
+    "url": "https://myetl.snu.ac.kr/courses/305788/assignments/390516",
+    "status": "past",
+    "hash": "{\"due\": \"2026-11-09T23:59:59+09:00\", \"title\": \"HW#8 & 9 (Due : 11/09)\"}"
+  },
+  {
+    "key": "305788-assignment-392231",
+    "course_id": 305788,
+    "course": "2026-2 조선해양공학의 이해 (001)",
+    "kind": "assignment",
+    "title": "HW#10 & 11 (Due : 11/23)",
+    "due": "2026-11-23T23:59:59+09:00",
+    "url": "https://myetl.snu.ac.kr/courses/305788/assignments/392231",
+    "status": "new",
+    "hash": "{\"due\": \"2026-11-23T23:59:59+09:00\", \"title\": \"HW#10 & 11 (Due : 11/23)\"}"
   },
   {
     "key": "305166-announcement-midterm",
@@ -76,7 +164,7 @@
     "url": null,
     "source": "announcement",
     "note": "종료 시각 미정",
-    "status": "unchanged",
+    "status": "past",
     "hash": "{\"due\": \"2026-10-23T19:00:00+09:00\", \"end\": null, \"title\": \"\\uc911\\uac04\\uace0\\uc0ac (Ch.21~30, 28\\ub3d9 101/102\\ud638)\"}"
   },
   {
@@ -132,7 +220,7 @@
     "url": null,
     "source": "announcement",
     "note": "",
-    "status": "unchanged",
+    "status": "past",
     "hash": "{\"due\": \"2026-11-15T23:59:00+09:00\", \"end\": null, \"title\": \"\\uacac\\ud559\\ubcf4\\uace0\\uc11c\"}"
   },
   {
@@ -146,7 +234,7 @@
     "url": null,
     "source": "announcement",
     "note": "참석 선택, 선정 여부에 따라 변경 가능",
-    "status": "unchanged",
+    "status": "past",
     "hash": "{\"due\": \"2026-11-07T11:30:00+09:00\", \"end\": \"2026-11-07T18:30:00+09:00\", \"title\": \"\\ub2f5\\uc0ac (\\uc6a9\\uc0b0, \\ud76c\\ub9dd\\uc790)\"}"
   },
   {
@@ -160,7 +248,7 @@
     "url": null,
     "source": "announcement",
     "note": "종일",
-    "status": "unchanged",
+    "status": "past",
     "hash": "{\"due\": \"2026-10-05T00:00:00+09:00\", \"end\": null, \"title\": \"\\uac1c\\ucc9c\\uc808 \\ub300\\uccb4\\uacf5\\ud734\\uc77c \\ud734\\uac15\"}"
   },
   {
@@ -174,7 +262,7 @@
     "url": null,
     "source": "announcement",
     "note": "종일",
-    "status": "unchanged",
+    "status": "past",
     "hash": "{\"due\": \"2026-10-12T00:00:00+09:00\", \"end\": null, \"title\": \"\\uc911\\uac04\\uace0\\uc0ac \\uc8fc\\uac04 \\ud734\\uac15\"}"
   },
   {
@@ -188,7 +276,7 @@
     "url": null,
     "source": "announcement",
     "note": "종일",
-    "status": "unchanged",
+    "status": "past",
     "hash": "{\"due\": \"2026-10-14T00:00:00+09:00\", \"end\": null, \"title\": \"\\uc911\\uac04\\uace0\\uc0ac \\uc8fc\\uac04 \\ud734\\uac15\"}"
   },
   {
@@ -202,7 +290,7 @@
     "url": null,
     "source": "announcement",
     "note": "종일",
-    "status": "unchanged",
+    "status": "past",
     "hash": "{\"due\": \"2026-11-02T00:00:00+09:00\", \"end\": null, \"title\": \"\\ub2f5\\uc0ac \\uc8fc\\uac04 \\ud734\\uac15\"}"
   },
   {
@@ -216,7 +304,7 @@
     "url": null,
     "source": "announcement",
     "note": "종일",
-    "status": "unchanged",
+    "status": "past",
     "hash": "{\"due\": \"2026-11-04T00:00:00+09:00\", \"end\": null, \"title\": \"\\ub2f5\\uc0ac \\uc8fc\\uac04 \\ud734\\uac15\"}"
   },
   {
@@ -230,7 +318,7 @@
     "url": null,
     "source": "announcement",
     "note": "종일",
-    "status": "unchanged",
+    "status": "past",
     "hash": "{\"due\": \"2026-11-16T00:00:00+09:00\", \"end\": null, \"title\": \"\\uac15\\uc0ac \\uc0ac\\uc815 \\ud734\\uac15\"}"
   },
   {
