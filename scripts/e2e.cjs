@@ -125,7 +125,7 @@ async function moveTo(p, x) {
     await p.click('[data-testid=open-message]'); await waitPhase(p, 'MESSAGE_OPEN');
     await p.waitForTimeout(700); await p.screenshot({ path: '/tmp/shots-letter-opening.png' });
     await p.waitForTimeout(2000); await p.screenshot({ path: '/tmp/shots-letter.png' });
-    ok((await p.textContent('[data-testid=letter-text]')).includes('메시지'), '임시 메시지 표시');
+    ok((await p.textContent('[data-testid=letter-text]')).includes('karma'), '임시 메시지 표시');
     await p.waitForTimeout(3000);
     ok(await phase(p) === 'MESSAGE_OPEN', '메시지는 자동으로 닫히지 않음');
     await p.click('[data-testid=finish]');
