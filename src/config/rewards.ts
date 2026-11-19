@@ -2,7 +2,7 @@ import type { CapsuleDef, RewardDef } from '../game/types';
 
 /** 편지를 받는 사람 (편지지 상단 "FOR ..." 에 표시) */
 export const LETTER_TO = 'JIHO';
-const SENDER = '[보내는 사람]';
+const SENDER = '신예';
 const LETTER_01 = '지호야, 생일 축하해 주고 싶었는데\n수능 눈치 보느라 못 했어.\n\n손편지 증정식 해줄게.';
 const LETTER_02 = '미국 여행 티켓이얌.';
 const LETTER_03 = '같이 밥 묵자\n\n나 창원에 내려가면 밥 사주마.\n먹고 싶은 거 생각해놔.';
