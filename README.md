@@ -61,3 +61,8 @@ src/styles/global.css   맨 위 THEME 변수 = 색상
 ## 엔딩 이후
 
 '마침' 후에는 종료 화면으로 끝나지 않고 앱으로 돌아와 보관함(편지 상세 포함)을 자유롭게 구경할 수 있습니다. 뽑기 조작은 비활성화되고 재시작/하트 충전 UI는 없습니다. 버튼 없는 최종 엔딩 화면을 쓰려면 `ENDING_CONFIG.showEndingScreen = true`.
+
+## 입장 암호 / 배포 (GitHub Pages)
+
+- 배포본(`npm run build`)은 처음에 숫자 암호 화면이 나옵니다. 암호는 `src/config/gateConfig.ts`의 `password`. 개발 서버(`npm run dev`)에서는 꺼집니다. 정적 사이트라 암호가 코드에 들어 있으므로 우연히 열어 보는 것을 막는 용도입니다.
+- 배포: 저장소 Settings → Pages → Source 를 "GitHub Actions"로 설정하고 `main`에 푸시하면 `.github/workflows/deploy.yml`이 자동 배포합니다.

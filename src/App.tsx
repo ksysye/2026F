@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { ASSETS } from './config/assets';
 import { ClawMachineScreen } from './components/ClawMachineScreen';
 import { CapsuleOpeningScreen } from './components/CapsuleOpeningScreen';
@@ -10,6 +11,8 @@ import { EndingScreen } from './components/ending/EndingScreen';
 import { LetterScreen } from './components/ending/LetterScreen';
 import { MessageArrivalPopup } from './components/ending/MessageArrivalPopup';
 import { ENDING_CONFIG } from './config/endingConfig';
+import { GateScreen } from './components/GateScreen';
+import { gateActive, isGateUnlocked } from './config/gateConfig';
 import { GameProvider, useGame } from './game/store';
 
 function Game() {
@@ -35,6 +38,14 @@ function Game() {
 }
 
 export default function App() {
+  const [unlocked, setUnlocked] = useState(() => !gateActive() || isGateUnlocked());
+  if (!unlocked) {
+    return (
+      <Stage backdropImage={null}>
+        <GateScreen onUnlock={() => setUnlocked(true)} />
+      </Stage>
+    );
+  }
   return (
     <GameProvider>
       <Game />

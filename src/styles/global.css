@@ -239,3 +239,16 @@ hr.dots { border: 0; border-top: 2px dotted #111; margin: 0; }
 /* 엔딩 후 앱 둘러보기: 검정에서 서서히 밝아지며 복귀 */
 .from-black { position: absolute; inset: 0; z-index: 20; background: #07060c; pointer-events: none; animation: from-black 2s ease forwards; }
 @keyframes from-black { 0% { opacity: 1; } 100% { opacity: 0; } }
+
+/* ---------- 입장 암호 ---------- */
+.gate { position: absolute; inset: 0; background: var(--c-bg-1); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 56px; transition: opacity .7s; animation: fade-in .9s; }
+.gate.ok { opacity: 0; }
+.gate-dots { display: flex; gap: 22px; }
+.gate-dots i { width: 16px; height: 16px; border-radius: 50%; border: var(--c-line); background: #fff; transition: background .2s, transform .2s; }
+.gate-dots i.on { background: #111; transform: scale(1.1); }
+.gate-dots.wrong { animation: gate-shake .5s; }
+.gate-dots.wrong i { background: #d0517f; border-color: #d0517f; }
+@keyframes gate-shake { 20%,60% { transform: translateX(-9px); } 40%,80% { transform: translateX(9px); } }
+.gate-pad { display: grid; grid-template-columns: repeat(3, 68px); gap: 16px 22px; }
+.gate-key { width: 68px; height: 68px; border-radius: 50%; background: #fff; border: var(--c-line); font-family: var(--font-dot); font-size: 24px; color: var(--c-ink); touch-action: manipulation; transition: transform .12s, background .12s; }
+.gate-key:active { transform: scale(.93); background: var(--c-frame); }
