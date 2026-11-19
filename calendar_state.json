@@ -62,5 +62,25 @@
  "303619-announcement-makeup-12-09": {
   "hash": "{\"due\": \"2026-12-09T00:00:00+09:00\", \"end\": null, \"title\": \"\\ubcf4\\uac15\"}",
   "event_id": "k3doq9l2ds3956u6suh79lqfmc"
+ },
+ "305166-assignment-390551": {
+  "hash": "{\"due\": \"2026-11-22T23:59:59+09:00\", \"title\": \"\\uacfc\\uc81c 4 [Due: 2026.11.22(\\uc77c)]\"}",
+  "event_id": "umdbmrc28tl865bjmfuc20qtpk"
+ },
+ "309547-assignment-384077": {
+  "hash": "{\"due\": \"2026-12-20T23:59:59+09:00\", \"title\": \"\\ubcf4\\uace0\\uc11c (\\ud559\\ub0b4 \\ubcf4\\uac74\\uc9c4\\ub8cc\\uc18c\\uc5d0\\uc11c \\uac80\\uc9c4 \\ud6c4, \\uacb0\\uacfc\\ub97c \\ubc14\\ud0d5\\uc73c\\ub85c \\uc791\\uc131) 12/20\\uae4c\\uc9c0 \\uc81c\\ucd9c\"}",
+  "event_id": "smudhie9b89455m4f4o2pherks"
+ },
+ "305788-assignment-392231": {
+  "hash": "{\"due\": \"2026-11-23T23:59:59+09:00\", \"title\": \"HW#10 & 11 (Due : 11/23)\"}",
+  "event_id": "i7f3un9dgbajd8c9g9lhv62r84"
+ },
+ "305788-announcement-fieldtrip": {
+  "hash": "{\"due\": \"2026-12-18T00:00:00+09:00\", \"end\": null, \"title\": \"\\uc870\\uc120\\uc18c \\uacac\\ud559\"}",
+  "event_id": "oaoqrhkb5pk2n75vjgpskjnr04"
+ },
+ "303619-announcement-wac-deadline": {
+  "hash": "{\"due\": \"2026-12-04T00:00:00+09:00\", \"end\": null, \"title\": \"\\uae00\\uc4f0\\uae30 \\uc0c1\\ub2f4 \\ub9c8\\uac10\"}",
+  "event_id": "kls20rgjosf9eierdo1qqi89ak"
  }
 }

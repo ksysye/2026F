@@ -40,7 +40,7 @@
     "title": "과제 4 [Due: 2026.11.22(일)]",
     "due": "2026-11-22T23:59:59+09:00",
     "url": "https://myetl.snu.ac.kr/courses/305166/assignments/390551",
-    "status": "new",
+    "status": "unchanged",
     "hash": "{\"due\": \"2026-11-22T23:59:59+09:00\", \"title\": \"\\uacfc\\uc81c 4 [Due: 2026.11.22(\\uc77c)]\"}"
   },
   {
@@ -62,7 +62,7 @@
     "title": "보고서 (학내 보건진료소에서 검진 후, 결과를 바탕으로 작성) 12/20까지 제출",
     "due": "2026-12-20T23:59:59+09:00",
     "url": "https://myetl.snu.ac.kr/courses/309547/assignments/384077",
-    "status": "new",
+    "status": "unchanged",
     "hash": "{\"due\": \"2026-12-20T23:59:59+09:00\", \"title\": \"\\ubcf4\\uace0\\uc11c (\\ud559\\ub0b4 \\ubcf4\\uac74\\uc9c4\\ub8cc\\uc18c\\uc5d0\\uc11c \\uac80\\uc9c4 \\ud6c4, \\uacb0\\uacfc\\ub97c \\ubc14\\ud0d5\\uc73c\\ub85c \\uc791\\uc131) 12/20\\uae4c\\uc9c0 \\uc81c\\ucd9c\"}"
   },
   {
@@ -150,7 +150,7 @@
     "title": "HW#10 & 11 (Due : 11/23)",
     "due": "2026-11-23T23:59:59+09:00",
     "url": "https://myetl.snu.ac.kr/courses/305788/assignments/392231",
-    "status": "new",
+    "status": "unchanged",
     "hash": "{\"due\": \"2026-11-23T23:59:59+09:00\", \"title\": \"HW#10 & 11 (Due : 11/23)\"}"
   },
   {
@@ -348,5 +348,31 @@
     "note": "종일, 시간은 평소 수업 시간",
     "status": "unchanged",
     "hash": "{\"due\": \"2026-12-09T00:00:00+09:00\", \"end\": null, \"title\": \"\\ubcf4\\uac15\"}"
+  },
+  {
+    "key": "305788-announcement-fieldtrip",
+    "course_id": 305788,
+    "course": "2026-2 조선해양공학의 이해 (001)",
+    "kind": "event",
+    "title": "조선소 견학",
+    "due": "2026-12-18T00:00:00+09:00",
+    "end": null,
+    "url": null,
+    "source": "announcement",
+    "note": "종일",
+    "status": "unchanged"
+  },
+  {
+    "key": "303619-announcement-wac-deadline",
+    "course_id": 303619,
+    "course": "2026-2 역사와 역사 재현 (001)",
+    "kind": "event",
+    "title": "글쓰기 상담 마감",
+    "due": "2026-12-04T00:00:00+09:00",
+    "end": null,
+    "url": null,
+    "source": "announcement",
+    "note": "종일",
+    "status": "unchanged"
   }
 ]
